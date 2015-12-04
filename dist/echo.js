@@ -72,7 +72,7 @@
   };
 
   echo.render = function () {
-    var nodes = document.querySelectorAll('img[data-src], iframe[data-src]');
+    var nodes = document.querySelectorAll('[data-src]');
     var length = nodes.length;
     var src, elem;
     var view = {
