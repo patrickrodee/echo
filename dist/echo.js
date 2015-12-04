@@ -1,4 +1,4 @@
-/*! echo.js v1.7.0 | (c) 2015 @toddmotto | https://github.com/toddmotto/echo */
+/*! echo-js v1.7.3 | (c) 2015 @toddmotto | https://github.com/toddmotto/echo */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     define(function() {
@@ -72,7 +72,7 @@
   };
 
   echo.render = function () {
-    var nodes = document.querySelectorAll('img[data-echo], [data-echo-background]');
+    var nodes = document.querySelectorAll('img[data-src], iframe[data-src]');
     var length = nodes.length;
     var src, elem;
     var view = {
@@ -86,33 +86,33 @@
       if (inView(elem, view)) {
 
         if (unload) {
-          elem.setAttribute('data-echo-placeholder', elem.src);
+          elem.setAttribute('data-src-placeholder', elem.src);
         }
 
-        if (elem.getAttribute('data-echo-background') !== null) {
-          elem.style.backgroundImage = "url(" + elem.getAttribute('data-echo-background') + ")";
+        if (elem.getAttribute('data-src-background') !== null) {
+          elem.style.backgroundImage = "url(" + elem.getAttribute('data-src-background') + ")";
         }
         else {
-          elem.src = elem.getAttribute('data-echo');
+          elem.src = elem.getAttribute('data-src');
         }
 
         if (!unload) {
-          elem.removeAttribute('data-echo');
-          elem.removeAttribute('data-echo-background');
+          elem.removeAttribute('data-src');
+          elem.removeAttribute('data-src-background');
         }
 
         callback(elem, 'load');
       }
-      else if (unload && !!(src = elem.getAttribute('data-echo-placeholder'))) {
+      else if (unload && !!(src = elem.getAttribute('data-src-placeholder'))) {
 
-        if (elem.getAttribute('data-echo-background') !== null) {
+        if (elem.getAttribute('data-src-background') !== null) {
           elem.style.backgroundImage = "url(" + src + ")";
         }
         else {
           elem.src = src;
         }
 
-        elem.removeAttribute('data-echo-placeholder');
+        elem.removeAttribute('data-src-placeholder');
         callback(elem, 'unload');
       }
     }
